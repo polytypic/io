@@ -1,0 +1,10 @@
+(library
+ (name qsched)
+ (libraries
+  io
+  domain-local-await
+  domain-local-timeout
+  lockfree
+  psq
+  mtime
+  mtime.clock.os))
