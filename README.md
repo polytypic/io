@@ -48,11 +48,11 @@ Eio's documentation, Eio has optimized backends for different platforms. See the
 below diagram and note the direction of dependencies:
 
 ```
-              Application
-                   |
-             +-----+----+
-             |          |
-             v          v
+       Applications      Libraries
+             |           |
+             +---------+ |
+             |         | |
+             v         v v
            Eio_main    Eio <--+
              |                |
 -  - ---+----+----+--- - -    |
@@ -118,10 +118,15 @@ applications, using that IO layer would then not necessarily be tied to any
 particular scheduler:
 
 ```
-                                +-- Eio
-Applications                    |
-    and    -----> IO <----------+-- Domainslib
- Libraries         |            |
+              Applications -----+
+                   |            |
+                   |            v
+                   |       Schedulers: (one or more more of)
+                   |
+                   |            +-- Eio
+                   v            |
+ Libraries -----> IO <----------+-- Domainslib
+                   |            |
              +-----+----+       +-- Actor lib
              |     |    |       |
              v     |    v       +-- Oslo
